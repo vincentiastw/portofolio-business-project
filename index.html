@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+  <!-- Fonts Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <div class="container-scroller">
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo align-items-center d-none d-xl-flex" href="index.html"><img src="img/vmc.png" class="mr-2" alt=""><h5 class="mt-2"><b>Vending Machine Sales</b></h5></a>
+        <a class="navbar-brand brand-logo-mini p" href="index.html">
+          <img src="img/vmc.png" class="mr-2" alt="">
+        </a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item nav-profile dropdown">
+            <a class="nav-link dropdown-toggle" id="myBtn">
+              <img src="img/Logo-RevoU-5.png" class="mr-2" alt="">
+              <span class="d-none d-sm-inline-block">Jayapura-Team 3</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="index.html">
+              <i class="fa-solid fa-home menu-icon"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link table-link" href="#table-us">
+              <i class="fa-solid fa-table menu-icon"></i>
+              <span class="menu-title">Table</span>
+            </a>
+          </li>          
+          <li class="nav-item">
+            <a class="nav-link about-link" id="aboutUsBtn" href="#">
+              <i class="fa-solid fa-info-circle menu-icon"></i>
+              <span class="menu-title">About Us</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row grid-margin stretch-card">
+            <div class="col-md-3 mb-2">
+              <div class="card card-tale">
+                <div class="card-body">
+                  <p class="mb-4">Total Sales</p>
+                  <p class="fs-30 mb-2">18,3 rb</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 mb-2">
+              <div class="card card-dark-blue">
+                <div class="card-body">
+                  <p class="mb-4">Total Transaction</p>
+                  <p class="fs-30 mb-2">8.882</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 mb-2">
+              <div class="card card-light-blue">
+                <div class="card-body">
+                  <p class="mb-4">Quantity Sales</p>
+                  <p class="fs-30 mb-2">9.481</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 mb-2">
+              <div class="card card-light-danger">
+                <div class="card-body">
+                  <p class="mb-4">Avr Order Value</p>
+                  <p class="fs-30 mb-2">2,6</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="mb-3 ml-3 grid-margin stretch-card">
+              <h2>Location</h2>
+            </div>
+            <div class="mb-3 ml-2 grid-margin stretch-card">
+              <select class="select p-2 rounded" id="locationSelect" onchange="updateChart()">
+                <option class="mt-2" value="Brunswick Sq Mall">Brunswick Sq Mall</option>
+                <option class="mt-2" value="EB Public Library">EB Public Library</option>
+                <option class="mt-2" value="Earle Asphalt">Earle Asphalt</option>
+                <option class="mt-2" value="GuttenPlans">GuttenPlans</option>
+                <option class="mt-2" value="All">All</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title">Total Sales Of Each Vending Machine Unit</p>
+                  <div class="d-flex flex-wrap">
+                    <canvas id="myChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                 <div class="d-flex justify-content-between">
+                  <p class="card-title">Category Sold Report</p>
+                 </div>
+                  <canvas id="myChart2"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                 <div class="d-flex justify-content-between">
+                  <p class="card-title">Most Popular Product</p>
+                 </div>
+                  <canvas id="myChart3"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-8 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                 <div class="d-flex justify-content-between">
+                  <p class="card-title">Avarege Order Value</p>
+                 </div>
+                  <canvas id="myChart4"></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                 <div class="d-flex justify-content-between">
+                  <p class="card-title">Types Of Payment</p>
+                 </div>
+                 <canvas id="chartId" aria-label="chart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" id="table-us">
+            <div class="col-md-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div style="overflow-x:auto;">
+                    <table id="example" class="table">
+                      <thead>
+                          <tr>
+                              <th>Machine</th>
+                              <th>Location</th>
+                              <th>Status</th>
+                              <th>Product</th>
+                              <th>Category</th>
+                              <th>Transaction</th>
+                              <th>TransDate</th>
+                              <th>Type</th>
+                              <th>RCoil</th>
+                              <th>RPrice</th>
+                              <th>RQty</th>
+                              <th>MCoil</th>
+                              <th>MPrice</th>
+                              <th>MQty</th>
+                              <th>LineTotal</th>
+                              <th>TransTotal</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <!-- Isi tabel akan ditambahkan melalui JavaScript -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>   
+    </div>
+  </div>
+
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close">&times;</span>
+        <h2>Jayapura Team 3</h2>
+      </div>
+      <div class="modal-body">
+        
+        <div class="row">
+          <div class="col-md-3 grid-margin stretch-card">
+            <div class="cardProfile">
+              <img src="img/Abdul Aziz .jpg" alt="Avatar" style="width:100%">
+              <div class="containerProfile">
+                <h4><b>Abdul Aziz</b></h4> 
+                <p>Universitas Hasyim Asy'ari Jombang</p> 
+                <p>Manajemen</p> 
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 grid-margin stretch-card">
+            <div class="cardProfile">
+              <img src="img/IMG-20240412-WA0148.jpg" alt="Avatar" style="width:100%">
+              <div class="containerProfile">
+                <h4><b>Fransius Hotmada Tambunan</b></h4> 
+                <p>Universitas Methodist Indonesia</p> 
+                <p>Sistem Informasi</p> 
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 grid-margin stretch-card">
+            <div class="cardProfile">
+              <img src="img/Nayla Puspa Febriana.jpg" alt="Avatar" style="width:100%">
+              <div class="containerProfile">
+                <h4><b>Nayla Puspa Febriana</b></h4> 
+                <p>Universitas Jenderal Soedirman</p> 
+                <p>Matematika</p> 
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 grid-margin stretch-card">
+            <div class="cardProfile">
+              <img src="img/Yuni.jpg" alt="Avatar" style="width:100%">
+              <div class="containerProfile">
+                <h4><b>Yuni Herlina Lubis</b></h4> 
+                <p>Universitas Negeri Jakarta</p> 
+                <p>Matematika</p> 
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-md-3 grid-margin stretch-card">
+            <div class="cardProfile">
+              <img src="img/FRESLY ASDAR .jpg" alt="Avatar" style="width:100%">
+              <div class="containerProfile">
+                <h4><b>Fresly Asdar</b></h4> 
+                <p>Universitas fajar Makassar</p> 
+                <p>Manajemen</p> 
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 grid-margin stretch-card">
+            <div class="cardProfile">
+              <img src="img/Ahmad Zidan Rifqi.jpg" alt="Avatar" style="width:100%">
+              <div class="containerProfile">
+                <h4><b>Ahmad Zidan Rifqi</b></h4> 
+                <p>Universitas Negeri Surabaya</p> 
+                <p>Sastra Inggris</p> 
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 grid-margin stretch-card">
+            <div class="cardProfile">
+              <img src="img/Cindy Ari Wijaya.jpg" alt="Avatar" style="width:100%">
+              <div class="containerProfile">
+                <h4><b>Cindy Ari Wijaya</b></h4> 
+                <p>Universitas Muria Kudus</p> 
+                <p>Sistem Informasi</p> 
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 grid-margin stretch-card">
+            <div class="cardProfile">
+              <img src="img/Doni Rizki.JPG" alt="Avatar" style="width:100%">
+              <div class="containerProfile">
+                <h4><b>Doni Rizki</b></h4> 
+                <p>Universitas Muhammadiyah Prof. DR. HAMKA</p> 
+                <p>Teknik Informatika</p> 
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-md-3 grid-margin stretch-card">
+            <div class="cardProfile">
+              <img src="img/Puspita Wulandari (Data Cleaning).jpg" alt="Avatar" style="width:100%">
+              <div class="containerProfile">
+                <h4><b>Puspita Wulandari</b></h4> 
+                <p>Universitas Trunojoyo Madura</p> 
+                <p>Sistem Informasi</p> 
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 grid-margin stretch-card">
+            <div class="cardProfile">
+              <img src="img/Renzi Thalia.jpg" alt="Avatar" style="width:100%">
+              <div class="containerProfile">
+                <h4><b>Renzi Thalia</b></h4> 
+                <p>Universitas Teknologi Bandung</p> 
+                <p>Teknik Informatika</p> 
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 grid-margin stretch-card">
+            <div class="cardProfile">
+              <img src="img/Rizki Arum nur Novita.jpg" alt="Avatar" style="width:100%">
+              <div class="containerProfile">
+                <h4><b>Rizki Arum Nur Novita</b></h4> 
+                <p>Universitas Ivet Semarang</p> 
+                <p>Bisnis Digital</p> 
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 grid-margin stretch-card">
+            <div class="cardProfile">
+              <img src="img/vincentia stella tri widyanti.JPG" alt="Avatar" style="width:100%">
+              <div class="containerProfile">
+                <h4><b>Vincentia Stella Tri Widyanti</b></h4> 
+                <p>Universitas Gadjah Mada</p> 
+                <p>Statistika</p> 
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-right">
+          <p>Designed by Jayapura Team 3</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- JS For Chart JS -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
+
